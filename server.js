@@ -16,7 +16,9 @@ app.get("/", (req, res) => {
 
 // About Page
 app.get("/about", (req, res) => {
-  res.send("https://drive.google.com/file/d/0B-Bn8BSb6ghDc3BuTlFiSF9xZ09TekVrcm9mLWw5anpRRGNV/view?usp=sharing&resourcekey=0-lKwU6HZ_h4l6MvR2RJgNlQ");
+  res.send(
+    "https://drive.google.com/file/d/0B-Bn8BSb6ghDc3BuTlFiSF9xZ09TekVrcm9mLWw5anpRRGNV/view?usp=sharing&resourcekey=0-lKwU6HZ_h4l6MvR2RJgNlQ"
+  );
 });
 
 // Get all products
@@ -46,7 +48,7 @@ app.listen(PORT, () => {
 });
 
 mongoose
-  .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URL)
   .then(() => {
     console.log("DB Connected Successfully");
   })
