@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("this is the homepage");
+  res.send("this is the homepage of the Website");
 });
 
 // About Page
