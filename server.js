@@ -8,30 +8,26 @@ const app = express();
 app.use(express.json());
 
 //Routes
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   res.send("this is the homepage");
 });
 
-
-
 //About Page
 
-app.get("/about", (req, res) => {
+app.post("/about", (req, res) => {
   res.send(
     "https://drive.google.com/file/d/0B-Bn8BSb6ghDc3BuTlFiSF9xZ09TekVrcm9mLWw5anpRRGNV/view?usp=sharing&resourcekey=0-lKwU6HZ_h4l6MvR2RJgNlQ"
   );
 });
 
-app.get('/products', async(req, res)=>{
+app.post("/products", async (req, res) => {
   try {
-    const products = await Product.find({})
+    const products = await Product.find({});
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({message: error.message})
+    res.status(500).json({ message: error.message });
   }
-})
-
-
+});
 
 app.post("/products", async (req, res) => {
   try {
