@@ -6,24 +6,21 @@ const MONGODB_URL = process.env.MONGODB_URL; // Get MongoDB URL from environment
 
 const app = express();
 
-//middlewire
-
+// Middleware
 app.use(express.json());
 
-//Routes
-app.post("/", (req, res) => {
+// Routes
+app.get("/", (req, res) => {
   res.send("this is the homepage");
 });
 
-//About Page
-
-app.post("/about", (req, res) => {
-  res.send(
-    "https://drive.google.com/file/d/0B-Bn8BSb6ghDc3BuTlFiSF9xZ09TekVrcm9mLWw5anpRRGNV/view?usp=sharing&resourcekey=0-lKwU6HZ_h4l6MvR2RJgNlQ"
-  );
+// About Page
+app.get("/about", (req, res) => {
+  res.send("https://drive.google.com/file/d/0B-Bn8BSb6ghDc3BuTlFiSF9xZ09TekVrcm9mLWw5anpRRGNV/view?usp=sharing&resourcekey=0-lKwU6HZ_h4l6MvR2RJgNlQ");
 });
 
-app.post("/products", async (req, res) => {
+// Get all products
+app.get("/products", async (req, res) => {
   try {
     const products = await Product.find({});
     res.status(200).json(products);
@@ -32,6 +29,7 @@ app.post("/products", async (req, res) => {
   }
 });
 
+// Create a new product
 app.post("/products", async (req, res) => {
   try {
     const product = await Product.create(req.body);
@@ -42,21 +40,10 @@ app.post("/products", async (req, res) => {
   }
 });
 
-PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Server running at port 3000");
+  console.log(`Server running at port ${PORT}`);
 });
-
-// mongoose
-//   .connect(
-//     "mongodb+srv://admin:A12345@cluster0.6uopllj.mongodb.net/BTechPapers?retryWrites=true&w=majority&appName=Cluster0"
-//   )
-//   .then(() => {
-//     console.log("DB Connected Successfully");
-//   })
-//   .catch((err) => {
-//     console.error("Error connecting to DB:", err);
-//   });
 
 mongoose
   .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
